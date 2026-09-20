@@ -10,7 +10,7 @@
             --royal-gold: #FFD700;
             --light-gold: #FFF0A5;
             --burgundy: #580017;
-            --light-burgundy: rgba(120, 20, 45, 0.8);
+            --light-burgundy: rgba(120, 20, 45, 0.95);
             --deep-maroon: #3A000E;
             --text-light: #FFFDF9;
             --jaggo-orange-pink: #D84A38;
@@ -19,6 +19,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--burgundy); color: var(--text-light); text-align: center; overflow-x: hidden; }
 
+        /* Opening Cover Screen */
         #opening-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 2000; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: transparent; transition: opacity 1.2s ease-in-out; }
         .door { position: absolute; top: 0; width: 50%; height: 100%; background-image: url('Opening.jpg'); background-size: 200% 100%; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); z-index: 2; }
         .door-left { left: 0; background-position: left center; }
@@ -30,36 +31,61 @@
         #opening-container.opened .door-right { transform: translateX(100%); }
         #opening-container.opened .seal-button { opacity: 0; transform: scale(0.5); }
 
+        /* Main Container & Scroll Fade Animations */
         .main-container { max-width: 500px; margin: 0 auto; padding: 20px 15px; opacity: 0; transition: opacity 1.2s ease-in-out; }
-        .fade-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; margin: 35px 0; }
+        .fade-section { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; margin: 35px 0; position: relative; }
         .fade-section.visible { opacity: 1; transform: translateY(0); }
-        .card-bg { border-radius: 18px; padding: 30px 20px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
-        .card-bg.bg-haldi { justify-content: flex-start; padding-top: 35px; }
+
+        /* Card Container Styling */
+        .card-bg { border-radius: 18px; padding: 30px 20px; border: 2px solid var(--royal-gold); background-size: cover; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         .bg-opening { background-image: url('Opening.jpg'); }
         .bg-save { background-image: url('download%20(5).jpg'); }
         .bg-sukh { background-image: url('SukhmaniSahibPath.jpg'); }
         .bg-haldi { background-image: url('Haldi_Shagun.jpg'); }
         .bg-jaggo { background-image: url('Jaggo.jpg'); }
         .bg-anand { background-image: url('Anand%20Karaj.jpg'); }
+
         .text-burgundy { color: var(--burgundy) !important; font-weight: 700; }
         .text-jaggo { color: var(--jaggo-orange-pink) !important; font-weight: 800; }
         .text-glow-gold { color: var(--royal-gold); text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         h1, h2, h3 { font-family: 'Cinzel', serif; }
         .script-font { font-family: 'Great Vibes', cursive; }
 
-        .scratch-container { position: relative; width: 100%; max-width: 380px; min-height: 100px; margin-top: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.5); background: rgba(0, 0, 0, 0.1); border: 1px solid var(--royal-gold); }
-        .scratch-content { padding: 20px 15px; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--burgundy); }
+        /* Floating Flower Animations */
+        .flower { position: absolute; font-size: 2rem; z-index: 5; pointer-events: none; animation: floatFlower 4s infinite ease-in-out; }
+        .flower-tl { top: 15px; left: 15px; }
+        .flower-br { bottom: 15px; right: 15px; }
+        @keyframes floatFlower {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(12deg); }
+        }
+
+        /* Timeline Tag */
+        .timeline-badge { position: absolute; right: -10px; top: 20px; background: var(--royal-gold); color: var(--burgundy); font-weight: 800; font-size: 0.75rem; padding: 6px 14px; border-radius: 20px 0 0 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 20; border: 1px solid var(--burgundy); }
+
+        /* Compact Scratch Cards */
+        .scratch-container { position: relative; width: 85%; max-width: 320px; min-height: 90px; margin-top: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); }
+        .scratch-content { padding: 12px; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--burgundy); font-size: 0.8rem; }
         canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10; touch-action: none; }
 
-        .curtain-container { position: relative; width: 100%; max-width: 380px; min-height: 200px; margin-top: 15px; border-radius: 12px; overflow: hidden; background: rgba(255, 253, 249, 1); border: 1px solid var(--royal-gold); cursor: pointer; }
-        .side-curtain { position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--light-burgundy); z-index: 10; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
+        /* Jaggo Bottom Left Positioning */
+        .card-bg.bg-jaggo { justify-content: flex-end; align-items: flex-start; padding-bottom: 30px; padding-left: 20px; }
+        .card-bg.bg-jaggo .scratch-container { width: 80%; max-width: 280px; }
+
+        /* Sukhmani Sahib Path Bottom Half Positioning */
+        .card-bg.bg-sukh { justify-content: flex-end; padding-bottom: 35px; }
+
+        /* Opaque Anand Karaj Curtain */
+        .curtain-container { position: relative; width: 85%; max-width: 320px; min-height: 160px; margin-top: 10px; border-radius: 12px; overflow: hidden; background: rgba(255, 253, 249, 0.98); border: 1px solid var(--royal-gold); cursor: pointer; }
+        .side-curtain { position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--burgundy); z-index: 10; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); opacity: 1; }
         .side-curtain.left { left: 0; border-right: 1px solid var(--royal-gold); }
-        .side-curtain.right { right: 0; border-left: 1px solid var(--royal-gold); opacity: 1; }
-        .curtain-text-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--burgundy); font-weight: 700; pointer-events: none; transition: opacity 0.8s ease; background: rgba(255, 240, 245, 0.4); padding: 10px; }
+        .side-curtain.right { right: 0; border-left: 1px solid var(--royal-gold); }
+        .curtain-text-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--royal-gold); font-weight: 700; pointer-events: none; transition: opacity 0.8s ease; padding: 10px; }
         .curtain-container.open .side-curtain.left { transform: translateX(-100%); }
         .curtain-container.open .side-curtain.right { transform: translateX(100%); }
         .curtain-container.open .curtain-text-overlay { opacity: 0; }
 
+        /* Flip Card */
         .flip-card { background-color: transparent; width: 100%; height: 380px; perspective: 1000px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; cursor: pointer; }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
@@ -67,40 +93,265 @@
         .flip-card-front { background: rgba(58, 0, 23, 0.92); display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .flip-card-back { background: var(--deep-maroon); transform: rotateY(180deg); display: flex; justify-content: center; align-items: center; padding: 0; overflow: hidden; }
         .couple-photo { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; }
+
+        /* Countdown Timer */
+        .countdown-card { background: rgba(58, 0, 14, 0.9); border: 2px solid var(--royal-gold); border-radius: 18px; padding: 25px 15px; margin-top: 40px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); }
+        .timer-box { display: flex; justify-content: center; gap: 12px; margin-top: 15px; }
+        .timer-unit { background: var(--royal-gold); color: var(--burgundy); border-radius: 8px; padding: 10px; min-width: 60px; font-weight: 800; }
+        .timer-unit span { display: block; font-size: 1.4rem; }
+        .timer-unit label { font-size: 0.65rem; text-transform: uppercase; font-weight: 600; }
+
         .music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1500; background: var(--burgundy); color: var(--light-gold); border: 2px solid var(--royal-gold); border-radius: 50%; width: 50px; height: 50px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); }
-        .btn-link { display: inline-block; margin-top: 10px; padding: 8px 20px; background: var(--burgundy); color: var(--light-gold); text-decoration: none; border-radius: 20px; font-size: 0.85rem; font-weight: 700; border: 1px solid var(--royal-gold); }
+        .btn-link { display: inline-block; margin-top: 8px; padding: 6px 16px; background: var(--burgundy); color: var(--light-gold); text-decoration: none; border-radius: 18px; font-size: 0.75rem; font-weight: 700; border: 1px solid var(--royal-gold); }
     </style>
 </head>
 <body>
     <audio id="weddingAudio" loop preload="auto"><source src="WeddingInvitationAudio.mp3" type="audio/mpeg"></audio>
     <button class="music-btn" id="musicToggle" onclick="toggleAudio()" title="Toggle Music">🎵</button>
-    <div id="opening-container"><div class="door door-left"></div><div class="door door-right"></div><div class="seal-button" onclick="openInvitation()"><div class="seal-circle">OPEN</div></div></div>
+    
+    <!-- Split Cover Envelope -->
+    <div id="opening-container">
+        <div class="door door-left"></div>
+        <div class="door door-right"></div>
+        <div class="seal-button" onclick="openInvitation()"><div class="seal-circle">OPEN</div></div>
+    </div>
 
     <div class="main-container" id="mainContent">
+
+        <!-- 4. First Page Cover -->
         <div class="fade-section card-bg bg-save">
-            <p class="text-burgundy" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem;">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</p>
-            <h1 class="script-font text-burgundy" style="font-size: 3.5rem; margin: 10px 0;">Shagun & Vishu</h1>
-            <p class="text-burgundy" style="font-style: italic; font-size: 0.9rem;">Together with their families, invite you to celebrate their wedding union</p>
-            <div style="margin-top: 20px; line-height: 1.6; font-size: 0.9rem;" class="text-burgundy"><p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p><div class="script-font" style="font-size: 1.8rem; margin: 5px 0;">&</div><p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p></div>
+            <div class="flower flower-tl">🌸</div>
+            <div class="flower flower-br">🌸</div>
+
+            <p class="text-burgundy" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.7rem; margin-bottom: 5px;">
+                Waheguru Ji Ka Khalsa<br>Waheguru Ji Ki Fateh
+            </p>
+            
+            <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1.1; margin: 15px 0;">
+                Shagun<br><span style="font-size: 2rem;">&</span><br>Vishu
+            </h1>
+
+            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin-bottom: 15px;">
+                Together with their families, invite you to celebrate their wedding union
+            </p>
+
+            <div style="line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
+                <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
+                <div class="script-font" style="font-size: 1.5rem; margin: 4px 0;">&</div>
+                <p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p>
+            </div>
         </div>
 
-        <div class="fade-section"><p style="font-size: 0.8rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p><div class="flip-card" id="storyFlipCard" onclick="flipCard()"><div class="flip-card-inner"><div class="flip-card-front"><h2 class="script-font text-glow-gold" style="font-size: 2.2rem; margin-bottom: 8px;">Our Story</h2><p style="font-size: 0.88rem; line-height: 1.6; color: #FFFDF9;">From two distinct corners of India—one raised in Punjab and the other conceived in Andhra Pradesh—our paths met in Germany while studying at university. What started there grew into a beautiful journey together.</p></div><div class="flip-card-back"><img src="WeddingInvitationPic.jpg" alt="Shagun and Vishu" class="couple-photo"></div></div></div></div>
+        <!-- 5. Flip Story Card -->
+        <div class="fade-section">
+            <p style="font-size: 0.8rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
+            <div class="flip-card" id="storyFlipCard" onclick="flipCard()">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h2 class="script-font text-glow-gold" style="font-size: 2.2rem; margin-bottom: 12px;">Our Story</h2>
+                        <p style="font-size: 0.85rem; line-height: 1.6; color: #FFFDF9;">
+                            From Punjab to Andhra Pradesh,<br>destiny brought two hearts together in Germany.<br><br>
+                            Between university days, shared laughter, and a little bit of chaos,<br>we found love—and our forever. ❤️<br><br>
+                            Two journeys. One beautiful beginning.
+                        </p>
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="WeddingInvitationPic.jpg" alt="Shagun and Vishu" class="couple-photo">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <div class="fade-section card-bg bg-sukh"><h2 class="text-burgundy">Sukhmani<br>Sahib Path</h2><div class="scratch-container"><canvas class="scratch-canvas" id="canvas-sukhmani" data-color="#FFB6C1" data-text="Scratch to Reveal Details"></canvas><div class="scratch-content"><p class="text-burgundy" style="font-weight: 700;">19th November | 11:00 AM - 1:00 PM</p><p class="text-burgundy" style="font-size: 0.88rem; margin-top: 5px;">508 Darshan Avenue, D Block, GT Road, Amritsar</p><a href="https://maps.google.com/?q=508+Darshan+Avenue+D+block+Gt+road+Amritsar" target="_blank" class="btn-link">Location Map</a></div></div></div>
-        <div class="fade-section card-bg bg-haldi"><h2 class="text-burgundy">Shagun & Haldi Ceremony</h2><div class="scratch-container"><canvas class="scratch-canvas" id="canvas-haldi" data-color="#FFD700" data-text="Scratch for Haldi Venue"></canvas><div class="scratch-content"><p class="text-burgundy" style="font-weight: 700;">20th November | 11:00 AM - 4:00 PM</p><p class="text-burgundy" style="font-size: 0.88rem; margin-top: 5px;">Green Wood Villa, By-Pass Near Ryan International School, Golden Gate, Amritsar</p><a href="https://maps.google.com/?q=Green+wood+villa+By+Pass+Near+Ryan+International+School+Amritsar" target="_blank" class="btn-link">Location Map</a></div></div></div>
-        <div class="fade-section card-bg bg-jaggo"><h2 class="text-jaggo">Jaggo Night</h2><div class="scratch-container"><canvas class="scratch-canvas" id="canvas-jaggo" data-color="#FF7F50" data-text="Scratch for Jaggo Venue"></canvas><div class="scratch-content"><p class="text-burgundy" style="font-weight: 700;">21st November | 7:00 PM Onwards</p><p class="text-burgundy" style="font-size: 0.88rem; margin-top: 5px;">Darshan Avenue, D Block, Amritsar</p><a href="https://maps.google.com/?q=Darshan+Avenue+D+block+Amritsar" target="_blank" class="btn-link">Location Map</a></div></div></div>
-        <div class="fade-section card-bg bg-anand"><h2 class="text-burgundy">Anand Karaj</h2><div class="curtain-container" id="anandCurtain" onclick="openCurtain()"><div class="side-curtain left"></div><div class="side-curtain right"></div><div class="curtain-text-overlay"><span style="font-size: 1.8rem;">✨</span><p class="script-font" style="font-size: 1.6rem; margin-top: 5px; color: var(--burgundy);">Celebrate With Us</p><small style="color: var(--burgundy); font-weight: 600;">Tap to Reveal Venue</small></div><div class="scratch-content"><p class="text-burgundy" style="font-weight: 700;">22nd November | 11:00 AM Onwards</p><p class="text-burgundy" style="font-size: 0.88rem; margin-top: 5px;">Best Western Swaran, Near Golden Gate, Amritsar</p><a href="https://maps.google.com/?q=Best+Western+Swaran+Golden+Gate+Amritsar" target="_blank" class="btn-link">Location Map</a></div></div></div>
+        <!-- 6. Sukhmani Sahib Path -->
+        <div class="fade-section card-bg bg-sukh">
+            <div class="timeline-badge">Nov 19</div>
+            <h2 class="text-burgundy" style="font-size: 1.5rem;">Sukhmani Sahib Path</h2>
+            <div class="scratch-container">
+                <canvas class="scratch-canvas" id="canvas-sukhmani" data-color="#FFB6C1" data-text="Scratch to Reveal Details"></canvas>
+                <div class="scratch-content">
+                    <p class="text-burgundy" style="font-weight: 700;">19th November | 11:00 AM - 1:00 PM</p>
+                    <p class="text-burgundy" style="margin-top: 3px;">508 Darshan Avenue, D Block, GT Road, Amritsar</p>
+                    <a href="https://maps.google.com/?q=508+Darshan+Avenue+D+block+Gt+road+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7 & 8. Shagun & Haldi Ceremony -->
+        <div class="fade-section card-bg bg-haldi">
+            <div class="timeline-badge">Nov 20</div>
+            <h2 class="text-burgundy" style="font-size: 1.6rem; line-height: 1.2;">Shagun &<br>Haldi</h2>
+            <div class="scratch-container">
+                <canvas class="scratch-canvas" id="canvas-haldi" data-color="#FFD700" data-text="Scratch for Haldi Venue"></canvas>
+                <div class="scratch-content">
+                    <p class="text-burgundy" style="font-weight: 700;">20th November | 11:00 AM - 4:00 PM</p>
+                    <p class="text-burgundy" style="margin-top: 3px;">Green Wood Villa, By-Pass Near Ryan Intl. School, Amritsar</p>
+                    <a href="https://maps.google.com/?q=Green+wood+villa+By+Pass+Near+Ryan+International+School+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Jaggo Night (Bottom Left Scratch Card) -->
+        <div class="fade-section card-bg bg-jaggo">
+            <div class="timeline-badge">Nov 21</div>
+            <h2 class="text-jaggo" style="font-size: 1.6rem; margin-bottom: 5px;">Jaggo Night</h2>
+            <div class="scratch-container">
+                <canvas class="scratch-canvas" id="canvas-jaggo" data-color="#FF7F50" data-text="Scratch for Jaggo Venue"></canvas>
+                <div class="scratch-content">
+                    <p class="text-burgundy" style="font-weight: 700;">21st November | 7:00 PM Onwards</p>
+                    <p class="text-burgundy" style="margin-top: 3px;">Darshan Avenue, D Block, Amritsar</p>
+                    <a href="https://maps.google.com/?q=Darshan+Avenue+D+block+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Anand Karaj (Opaque Curtains & Save the Date) -->
+        <div class="fade-section card-bg bg-anand">
+            <div class="timeline-badge">Nov 22</div>
+            <h2 class="text-burgundy" style="font-size: 1.6rem;">Anand Karaj</h2>
+            <p class="script-font text-burgundy" style="font-size: 1.8rem; margin: 4px 0;">Save the Date</p>
+            <div class="curtain-container" id="anandCurtain" onclick="openCurtain()">
+                <div class="side-curtain left"></div>
+                <div class="side-curtain right"></div>
+                <div class="curtain-text-overlay">
+                    <span style="font-size: 1.4rem;">✨</span>
+                    <p class="script-font" style="font-size: 1.4rem; color: var(--royal-gold);">Celebrate With Us</p>
+                    <small style="color: var(--royal-gold); font-size: 0.65rem;">Tap to Reveal Venue</small>
+                </div>
+                <div class="scratch-content">
+                    <p class="text-burgundy" style="font-weight: 700;">22nd November | 11:00 AM Onwards</p>
+                    <p class="text-burgundy" style="margin-top: 3px;">Best Western Swaran, Near Golden Gate, Amritsar</p>
+                    <a href="https://maps.google.com/?q=Best+Western+Swaran+Golden+Gate+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. Countdown Timer -->
+        <div class="fade-section countdown-card">
+            <h3 class="script-font text-glow-gold" style="font-size: 2.2rem;">Counting Down to Forever</h3>
+            <p style="font-size: 0.8rem; color: var(--light-gold);">Until we say "I Do"</p>
+            <div class="timer-box">
+                <div class="timer-unit"><span id="days">00</span><label>Days</label></div>
+                <div class="timer-unit"><span id="hours">00</span><label>Hours</label></div>
+                <div class="timer-unit"><span id="minutes">00</span><label>Mins</label></div>
+                <div class="timer-unit"><span id="seconds">00</span><label>Secs</label></div>
+            </div>
+        </div>
+
     </div>
 
     <script>
-        function openInvitation() { const opening = document.getElementById('opening-container'); const mainContent = document.getElementById('mainContent'); const audio = document.getElementById('weddingAudio'); opening.classList.add('opened'); audio.play().catch(e => console.log('Autoplay prevented')); setTimeout(() => { mainContent.style.opacity = '1'; setTimeout(() => { opening.style.display = 'none'; }, 1200); }, 600); }
-        function toggleAudio() { const audio = document.getElementById('weddingAudio'); const btn = document.getElementById('musicToggle'); if (audio.paused) { audio.play(); btn.textContent = '🎵'; } else { audio.pause(); btn.textContent = '🔇'; } }
-        function flipCard() { document.getElementById('storyFlipCard').classList.toggle('flipped'); }
-        function openCurtain() { document.getElementById('anandCurtain').classList.add('open'); }
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); else entry.target.classList.remove('visible'); }); }, { threshold: 0.15 });
+        function openInvitation() {
+            const opening = document.getElementById('opening-container');
+            const mainContent = document.getElementById('mainContent');
+            const audio = document.getElementById('weddingAudio');
+            opening.classList.add('opened');
+            audio.play().catch(e => console.log('Autoplay prevented'));
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                setTimeout(() => { opening.style.display = 'none'; }, 1200);
+            }, 600);
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('weddingAudio');
+            const btn = document.getElementById('musicToggle');
+            if (audio.paused) { audio.play(); btn.textContent = '🎵'; }
+            else { audio.pause(); btn.textContent = '🔇'; }
+        }
+
+        function flipCard() {
+            document.getElementById('storyFlipCard').classList.toggle('flipped');
+        }
+
+        function openCurtain() {
+            document.getElementById('anandCurtain').classList.add('open');
+        }
+
+        /* Fade Out & In on Scroll */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
         document.querySelectorAll('.fade-section').forEach(section => observer.observe(section));
-        function initScratchCard(canvasId) { const canvas = document.getElementById(canvasId); if (!canvas) return; const ctx = canvas.getContext('2d'); const color = canvas.getAttribute('data-color'); const text = canvas.getAttribute('data-text'); function resizeCanvas() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; ctx.globalCompositeOperation = 'source-over'; ctx.fillStyle = color; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.font = 'bold 14px Montserrat, sans-serif'; ctx.fillStyle = '#580017'; ctx.textAlign = 'center'; ctx.fillText(text, canvas.width / 2, canvas.height / 2); } resizeCanvas(); let isDrawing = false; function scratch(e) { if (!isDrawing) return; const rect = canvas.getBoundingClientRect(); const clientX = e.touches ? e.touches[0].clientX : e.clientX; const clientY = e.touches ? e.touches[0].clientY : e.clientY; ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(clientX - rect.left, clientY - rect.top, 25, 0, Math.PI * 2); ctx.fill(); } canvas.addEventListener('mousedown', () => isDrawing = true); canvas.addEventListener('mouseup', () => isDrawing = false); canvas.addEventListener('mouseleave', () => isDrawing = false); canvas.addEventListener('mousemove', scratch); canvas.addEventListener('touchstart', () => isDrawing = true); canvas.addEventListener('touchend', () => isDrawing = false); canvas.addEventListener('touchmove', scratch); }
-        window.addEventListener('load', () => { initScratchCard('canvas-sukhmani'); initScratchCard('canvas-haldi'); initScratchCard('canvas-jaggo'); });
+
+        /* Scratch Card Canvas Setup */
+        function initScratchCard(canvasId) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const color = canvas.getAttribute('data-color');
+            const text = canvas.getAttribute('data-text');
+
+            function resizeCanvas() {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = canvas.parentElement.offsetHeight;
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = color;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.font = 'bold 12px Montserrat, sans-serif';
+                ctx.fillStyle = '#580017';
+                ctx.textAlign = 'center';
+                ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+            }
+
+            resizeCanvas();
+            let isDrawing = false;
+
+            function scratch(e) {
+                if (!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(clientX - rect.left, clientY - rect.top, 22, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            canvas.addEventListener('mousedown', () => isDrawing = true);
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mouseleave', () => isDrawing = false);
+            canvas.addEventListener('mousemove', scratch);
+            canvas.addEventListener('touchstart', () => isDrawing = true);
+            canvas.addEventListener('touchend', () => isDrawing = false);
+            canvas.addEventListener('touchmove', scratch);
+        }
+
+        /* Live Countdown Script */
+        const weddingDate = new Date('November 19, 2026 11:00:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.querySelector('.countdown-card').innerHTML = "<h3>The Celebrations Have Begun! 🎉</h3>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        window.addEventListener('load', () => {
+            initScratchCard('canvas-sukhmani');
+            initScratchCard('canvas-haldi');
+            initScratchCard('canvas-jaggo');
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+        });
     </script>
 </body>
 </html>
