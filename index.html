@@ -34,11 +34,11 @@
         /* Main Container Layout */
         .main-container { max-width: 620px; margin: 0 auto; padding: 20px 10px; opacity: 0; transition: opacity 1.2s ease-in-out; }
         
-        /* 1. Scroll Fade-in & Fade-out */
+        /* Scroll Fade-in & Fade-out */
         .fade-section { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.25, 1, 0.5, 1), transform 0.9s cubic-bezier(0.25, 1, 0.5, 1); margin: 40px 0; }
         .fade-section.visible { opacity: 1; transform: translateY(0); }
 
-        /* 2. Timeline Grid Wrapper (Dates on Right) */
+        /* Timeline Grid Wrapper (Dates on Right) */
         .timeline-row { display: flex; align-items: center; gap: 12px; position: relative; }
         .timeline-card { flex: 1; }
         .timeline-date-tag { width: 90px; min-width: 90px; background: rgba(255, 215, 0, 0.15); border: 1.5px solid var(--royal-gold); border-radius: 12px; padding: 12px 6px; text-align: center; color: var(--light-gold); font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
@@ -47,8 +47,13 @@
 
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
-        .card-bg.bg-haldi { justify-content: flex-start; padding-top: 35px; }
-        .card-bg.bg-sukh { justify-content: flex-end; padding-bottom: 35px; }
+        
+        /* 4. Shagun & Haldi Top Margin */
+        .card-bg.bg-haldi { justify-content: flex-start; padding-top: 60px; }
+        
+        /* 3. Sukhmani Sahib Path on Top of Bottom Half */
+        .card-bg.bg-sukh { justify-content: flex-end; padding-bottom: 70px; }
+        
         .bg-opening { background-image: url('Opening.jpg'); }
         .bg-save { background-image: url('download%20(5).jpg'); }
         .bg-sukh { background-image: url('SukhmaniSahibPath.jpg'); }
@@ -62,39 +67,30 @@
         h1, h2, h3 { font-family: 'Cinzel', serif; }
         .script-font { font-family: 'Great Vibes', cursive; }
 
-        /* 4. First Page Floral Ornaments & Sway Animation */
+        /* Static Floral Ornaments (No Motion) */
         .floral-ornament { position: absolute; width: 140px; height: 140px; pointer-events: none; z-index: 5; opacity: 0.9; }
-        .floral-tl { top: -10px; left: -10px; animation: swaySlow 6s ease-in-out infinite alternate; }
-        .floral-br { bottom: -10px; right: -10px; transform: rotate(180deg); animation: swaySlow 6s ease-in-out infinite alternate-reverse; }
+        .floral-tl { top: -10px; left: -10px; }
+        .floral-br { bottom: -10px; right: -10px; transform: rotate(180deg); }
 
-        @keyframes swaySlow {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(8deg) scale(1.05); }
-        }
-
-        /* 8. Reduced Scratch Card and Internal Text Dimensions */
+        /* Scratch Card Dimensions */
         .scratch-container { position: relative; width: 100%; max-width: 310px; min-height: 90px; margin-top: 12px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.4); background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); }
         .scratch-content { padding: 12px 10px; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--burgundy); font-size: 0.78rem; }
         canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10; touch-action: none; }
 
-        /* 10. Anand Karaj Curtain & Hanging Animated Lanterns */
-        .curtain-container { position: relative; width: 100%; max-width: 320px; min-height: 180px; margin-top: 12px; border-radius: 10px; overflow: hidden; background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); cursor: pointer; }
+        /* 5. Reduced Anand Karaj Curtain Size */
+        .curtain-container { position: relative; width: 100%; max-width: 310px; min-height: 150px; margin-top: 10px; border-radius: 10px; overflow: hidden; background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); cursor: pointer; }
         .side-curtain { position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--light-burgundy); z-index: 10; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); opacity: 1; }
         .side-curtain.left { left: 0; border-right: 1.5px solid var(--royal-gold); }
         .side-curtain.right { right: 0; border-left: 1.5px solid var(--royal-gold); }
-        .curtain-text-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--royal-gold); font-weight: 700; pointer-events: none; transition: opacity 0.8s ease; background: rgba(58, 0, 14, 0.4); padding: 10px; }
+        .curtain-text-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 11; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--royal-gold); font-weight: 700; pointer-events: none; transition: opacity 0.8s ease; background: rgba(58, 0, 14, 0.4); padding: 8px; }
         .curtain-container.open .side-curtain.left { transform: translateX(-100%); }
         .curtain-container.open .side-curtain.right { transform: translateX(100%); }
         .curtain-container.open .curtain-text-overlay { opacity: 0; }
 
-        .lantern { position: absolute; top: 0; width: 28px; z-index: 6; transform-origin: top center; animation: swingLantern 4s ease-in-out infinite alternate; pointer-events: none; }
+        /* Static Lanterns (No Motion) */
+        .lantern { position: absolute; top: 0; width: 26px; z-index: 6; pointer-events: none; }
         .lantern-left { left: 15px; }
-        .lantern-right { right: 15px; animation-delay: -2s; }
-
-        @keyframes swingLantern {
-            0% { transform: rotate(-30deg); }
-            100% { transform: rotate(30deg); }
-        }
+        .lantern-right { right: 15px; }
 
         /* Flip Card */
         .flip-card { background-color: transparent; width: 100%; height: 380px; perspective: 1000px; }
@@ -105,7 +101,7 @@
         .flip-card-back { background: var(--deep-maroon); transform: rotateY(180deg); display: flex; justify-content: center; align-items: center; padding: 0; overflow: hidden; }
         .couple-photo { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; }
         
-        /* 11. Countdown Section */
+        /* Countdown Section */
         .countdown-card { background: rgba(58, 0, 14, 0.95); border: 2px solid var(--royal-gold); border-radius: 18px; padding: 30px 15px; margin: 40px 0; box-shadow: 0 10px 25px rgba(0,0,0,0.6); }
         .countdown-grid { display: flex; justify-content: center; gap: 12px; margin: 20px 0 15px; }
         .time-box { background: rgba(255, 215, 0, 0.1); border: 1px solid var(--royal-gold); border-radius: 10px; padding: 10px 14px; min-width: 65px; }
@@ -125,9 +121,8 @@
 
     <div class="main-container" id="mainContent">
         
-        <!-- 4. First Page with Lavender/Pink Floral Ornaments & Specific Names Layout -->
+        <!-- 2. First Page Invitation Layout -->
         <div class="fade-section card-bg bg-save">
-            <!-- Animated Pink & Lavender Flowers with Green Leaves -->
             <svg class="floral-ornament floral-tl" viewBox="0 0 100 100" fill="none">
                 <path d="M20 20C35 5 65 5 80 20C95 35 95 65 80 80" stroke="#E6E6FA" stroke-width="3"/>
                 <circle cx="25" cy="25" r="14" fill="#FFB6C1" opacity="0.85"/>
@@ -153,7 +148,11 @@
                 <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1;">Vishu</h1>
             </div>
 
-            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">Together with their families, invite you to celebrate their wedding union</p>
+            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px; line-height: 1.5;">
+                Together with their families,<br>
+                invite you to celebrate their<br>
+                wedding union
+            </p>
             
             <div style="margin-top: 15px; line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
                 <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
@@ -162,7 +161,7 @@
             </div>
         </div>
 
-        <!-- 5. Updated Our Story Text -->
+        <!-- Our Story Text -->
         <div class="fade-section">
             <p style="font-size: 0.78rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
             <div class="flip-card" id="storyFlipCard" onclick="flipCard()">
@@ -184,7 +183,7 @@
             </div>
         </div>
 
-        <!-- 2 & 6. Event 1: Sukhmani Sahib Path (Placed on Bottom Half, Date Tag on Right) -->
+        <!-- 3. Event 1: Sukhmani Sahib Path (Top of Bottom Half) -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-sukh">
                 <h2 class="text-burgundy" style="font-size: 1.35rem; line-height: 1.2;">Sukhmani<br>Sahib Path</h2>
@@ -203,7 +202,7 @@
             </div>
         </div>
 
-        <!-- 2 & 7. Event 2: Shagun & Haldi Ceremony (Heading formatted, Date Tag on Right) -->
+        <!-- 4. Event 2: Shagun & Haldi Ceremony (Increased Top Margin) -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-haldi">
                 <h2 class="text-burgundy" style="font-size: 1.35rem; line-height: 1.2;">Shagun &<br>Haldi</h2>
@@ -222,7 +221,7 @@
             </div>
         </div>
 
-        <!-- 2. Event 3: Jaggo Night (Date Tag on Right) -->
+        <!-- Event 3: Jaggo Night -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-jaggo">
                 <h2 class="text-jaggo" style="font-size: 1.35rem;">Jaggo Night</h2>
@@ -241,15 +240,14 @@
             </div>
         </div>
 
-        <!-- 2 & 10. Event 4: Anand Karaj (Opaque Curtains, Hanging Animated Lanterns, Save the Date Text) -->
+        <!-- 5. Event 4: Anand Karaj (Reduced Bottom Curtain Size) -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-anand">
                 <h2 class="text-burgundy" style="font-size: 1.35rem;">Anand Karaj</h2>
                 
-                <p class="script-font text-burgundy" style="font-size: 1.6rem; margin: 6px 0 2px;">Save the Date</p>
+                <p class="script-font text-burgundy" style="font-size: 1.5rem; margin: 4px 0 2px;">Save the Date</p>
                 
                 <div class="curtain-container" id="anandCurtain" onclick="openCurtain()">
-                    <!-- Moving Hanging Lanterns -->
                     <svg class="lantern lantern-left" viewBox="0 0 30 60" fill="none">
                         <line x1="15" y1="0" x2="15" y2="20" stroke="#FFD700" stroke-width="2"/>
                         <rect x="5" y="20" width="20" height="28" rx="4" fill="#FFD700" stroke="#8B0000" stroke-width="2"/>
@@ -263,13 +261,12 @@
                         <line x1="15" y1="48" x2="15" y2="58" stroke="#FFD700" stroke-width="2"/>
                     </svg>
 
-                    <!-- Opaque Side Curtains -->
                     <div class="side-curtain left"></div>
                     <div class="side-curtain right"></div>
                     
                     <div class="curtain-text-overlay">
-                        <span style="font-size: 1.4rem;">✨</span>
-                        <p class="script-font" style="font-size: 1.5rem; color: var(--royal-gold); margin-top: 2px;">Celebrate With Us</p>
+                        <span style="font-size: 1.3rem;">✨</span>
+                        <p class="script-font" style="font-size: 1.4rem; color: var(--royal-gold); margin-top: 2px;">Celebrate With Us</p>
                         <small style="color: var(--light-gold); font-size: 0.7rem;">Tap to Reveal Venue</small>
                     </div>
 
@@ -286,7 +283,7 @@
             </div>
         </div>
 
-        <!-- 11. Authentic Wedding Countdown Timer -->
+        <!-- Countdown Timer -->
         <div class="fade-section countdown-card">
             <h3 class="script-font text-glow-gold" style="font-size: 2.2rem; margin-bottom: 5px;">Counting Down to Our Forever</h3>
             <p style="font-size: 0.8rem; color: var(--light-gold); font-style: italic;">We are together forever ❤️</p>
@@ -302,7 +299,6 @@
     </div>
 
     <script>
-        // Opening Animation & Audio Trigger
         function openInvitation() { 
             const opening = document.getElementById('opening-container'); 
             const mainContent = document.getElementById('mainContent'); 
@@ -337,20 +333,18 @@
             document.getElementById('anandCurtain').classList.add('open'); 
         }
 
-        // 1. Fade-in and Fade-out Observer on Scroll
         const observer = new IntersectionObserver((entries) => { 
             entries.forEach(entry => { 
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible'); 
                 } else {
-                    entry.target.classList.remove('visible'); // Fade out when scrolled past
+                    entry.target.classList.remove('visible'); 
                 }
             }); 
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-section').forEach(section => observer.observe(section));
 
-        // 8. Resized Scratch Canvas Function
         function initScratchCard(canvasId) { 
             const canvas = document.getElementById(canvasId); 
             if (!canvas) return; 
@@ -393,7 +387,6 @@
             canvas.addEventListener('touchmove', scratch); 
         }
 
-        // 11. Live Countdown Timer Script (Target: 19th November)
         function startCountdown() {
             const weddingDate = new Date("November 19, 2026 11:00:00").getTime();
             
