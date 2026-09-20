@@ -48,10 +48,10 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
-        /* 4. Shagun & Haldi Top Margin */
+        /* 4. First Page Extra Top and Bottom Padding */
+        .card-bg.bg-save { padding-top: 55px; padding-bottom: 55px; }
+
         .card-bg.bg-haldi { justify-content: flex-start; padding-top: 60px; }
-        
-        /* 3. Sukhmani Sahib Path on Top of Bottom Half */
         .card-bg.bg-sukh { justify-content: flex-end; padding-bottom: 70px; }
         
         .bg-opening { background-image: url('Opening.jpg'); }
@@ -67,18 +67,13 @@
         h1, h2, h3 { font-family: 'Cinzel', serif; }
         .script-font { font-family: 'Great Vibes', cursive; }
 
-        /* Static Floral Ornaments (No Motion) */
-        .floral-ornament { position: absolute; width: 140px; height: 140px; pointer-events: none; z-index: 5; opacity: 0.9; }
-        .floral-tl { top: -10px; left: -10px; }
-        .floral-br { bottom: -10px; right: -10px; transform: rotate(180deg); }
-
-        /* Scratch Card Dimensions */
-        .scratch-container { position: relative; width: 100%; max-width: 310px; min-height: 90px; margin-top: 12px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.4); background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); }
+        /* 2 & 3. Scratch Card Container (No Border & 0.2 Transparent Background) */
+        .scratch-container { position: relative; width: 100%; max-width: 310px; min-height: 90px; margin-top: 12px; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.4); background: rgba(255, 253, 249, 0.2); }
         .scratch-content { padding: 12px 10px; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--burgundy); font-size: 0.78rem; }
         canvas.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10; touch-action: none; }
 
-        /* 5. Reduced Anand Karaj Curtain Size */
-        .curtain-container { position: relative; width: 100%; max-width: 310px; min-height: 150px; margin-top: 10px; border-radius: 10px; overflow: hidden; background: rgba(255, 253, 249, 0.95); border: 1px solid var(--royal-gold); cursor: pointer; }
+        /* Anand Karaj Curtain Container */
+        .curtain-container { position: relative; width: 100%; max-width: 310px; min-height: 150px; margin-top: 10px; border-radius: 10px; overflow: hidden; background: rgba(255, 253, 249, 0.2); cursor: pointer; }
         .side-curtain { position: absolute; top: 0; width: 50%; height: 100%; background-color: var(--light-burgundy); z-index: 10; transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1); opacity: 1; }
         .side-curtain.left { left: 0; border-right: 1.5px solid var(--royal-gold); }
         .side-curtain.right { right: 0; border-left: 1.5px solid var(--royal-gold); }
@@ -86,11 +81,6 @@
         .curtain-container.open .side-curtain.left { transform: translateX(-100%); }
         .curtain-container.open .side-curtain.right { transform: translateX(100%); }
         .curtain-container.open .curtain-text-overlay { opacity: 0; }
-
-        /* Static Lanterns (No Motion) */
-        .lantern { position: absolute; top: 0; width: 26px; z-index: 6; pointer-events: none; }
-        .lantern-left { left: 15px; }
-        .lantern-right { right: 15px; }
 
         /* Flip Card */
         .flip-card { background-color: transparent; width: 100%; height: 380px; perspective: 1000px; }
@@ -121,26 +111,9 @@
 
     <div class="main-container" id="mainContent">
         
-        <!-- 2. First Page Invitation Layout -->
+        <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
-            <svg class="floral-ornament floral-tl" viewBox="0 0 100 100" fill="none">
-                <path d="M20 20C35 5 65 5 80 20C95 35 95 65 80 80" stroke="#E6E6FA" stroke-width="3"/>
-                <circle cx="25" cy="25" r="14" fill="#FFB6C1" opacity="0.85"/>
-                <circle cx="45" cy="18" r="10" fill="#E6E6FA" opacity="0.9"/>
-                <circle cx="18" cy="45" r="11" fill="#D8BFD8" opacity="0.85"/>
-                <path d="M10 25 Q 30 10 35 35" fill="#2E8B57" opacity="0.7"/>
-                <path d="M25 10 Q 10 30 35 35" fill="#3CB371" opacity="0.7"/>
-            </svg>
-            <svg class="floral-ornament floral-br" viewBox="0 0 100 100" fill="none">
-                <path d="M20 20C35 5 65 5 80 20C95 35 95 65 80 80" stroke="#E6E6FA" stroke-width="3"/>
-                <circle cx="25" cy="25" r="14" fill="#FFB6C1" opacity="0.85"/>
-                <circle cx="45" cy="18" r="10" fill="#E6E6FA" opacity="0.9"/>
-                <circle cx="18" cy="45" r="11" fill="#D8BFD8" opacity="0.85"/>
-                <path d="M10 25 Q 30 10 35 35" fill="#2E8B57" opacity="0.7"/>
-                <path d="M25 10 Q 10 30 35 35" fill="#3CB371" opacity="0.7"/>
-            </svg>
-
-            <p class="text-burgundy" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.72rem; line-height: 1.5;">Waheguru Ji Ka Khalsa<br>Waheguru Ji Ki Fateh</p>
+            <p class="text-burgundy" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.72rem; line-height: 1.5;">Waheguru Ji da Khalsa<br>Waheguru Ji di Fateh</p>
             
             <div style="margin: 15px 0;">
                 <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1;">Shagun</h1>
@@ -183,7 +156,7 @@
             </div>
         </div>
 
-        <!-- 3. Event 1: Sukhmani Sahib Path (Top of Bottom Half) -->
+        <!-- Event 1: Sukhmani Sahib Path -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-sukh">
                 <h2 class="text-burgundy" style="font-size: 1.35rem; line-height: 1.2;">Sukhmani<br>Sahib Path</h2>
@@ -202,7 +175,7 @@
             </div>
         </div>
 
-        <!-- 4. Event 2: Shagun & Haldi Ceremony (Increased Top Margin) -->
+        <!-- Event 2: Shagun & Haldi Ceremony -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-haldi">
                 <h2 class="text-burgundy" style="font-size: 1.35rem; line-height: 1.2;">Shagun &<br>Haldi</h2>
@@ -240,7 +213,7 @@
             </div>
         </div>
 
-        <!-- 5. Event 4: Anand Karaj (Reduced Bottom Curtain Size) -->
+        <!-- Event 4: Anand Karaj -->
         <div class="fade-section timeline-row">
             <div class="timeline-card card-bg bg-anand">
                 <h2 class="text-burgundy" style="font-size: 1.35rem;">Anand Karaj</h2>
@@ -248,19 +221,6 @@
                 <p class="script-font text-burgundy" style="font-size: 1.5rem; margin: 4px 0 2px;">Save the Date</p>
                 
                 <div class="curtain-container" id="anandCurtain" onclick="openCurtain()">
-                    <svg class="lantern lantern-left" viewBox="0 0 30 60" fill="none">
-                        <line x1="15" y1="0" x2="15" y2="20" stroke="#FFD700" stroke-width="2"/>
-                        <rect x="5" y="20" width="20" height="28" rx="4" fill="#FFD700" stroke="#8B0000" stroke-width="2"/>
-                        <circle cx="15" cy="34" r="5" fill="#FF4500"/>
-                        <line x1="15" y1="48" x2="15" y2="58" stroke="#FFD700" stroke-width="2"/>
-                    </svg>
-                    <svg class="lantern lantern-right" viewBox="0 0 30 60" fill="none">
-                        <line x1="15" y1="0" x2="15" y2="20" stroke="#FFD700" stroke-width="2"/>
-                        <rect x="5" y="20" width="20" height="28" rx="4" fill="#FFD700" stroke="#8B0000" stroke-width="2"/>
-                        <circle cx="15" cy="34" r="5" fill="#FF4500"/>
-                        <line x1="15" y1="48" x2="15" y2="58" stroke="#FFD700" stroke-width="2"/>
-                    </svg>
-
                     <div class="side-curtain left"></div>
                     <div class="side-curtain right"></div>
                     
