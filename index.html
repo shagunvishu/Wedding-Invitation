@@ -14,10 +14,45 @@
             --deep-maroon: #3A000E;
             --text-light: #FFFDF9;
             --jaggo-orange-pink: #D84A38;
+            --creamy: #FFFFF0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--burgundy); color: var(--text-light); text-align: center; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--creamy); color: var(--text-light); text-align: center; overflow-x: hidden; }
+
+        /* Golden Petals Layer */
+        #petals-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Allows user clicks to pass through */
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .petal {
+            position: absolute;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 15px 0 15px 0;
+            opacity: 0.8;
+            box-shadow: 0 0 4px rgba(255, 215, 0, 0.6);
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                top: -10%;
+                transform: translateX(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                top: 110%;
+                transform: translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
 
         /* Opening Split Envelope Overlay */
         #opening-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 2000; display: flex; justify-content: center; align-items: center; overflow: hidden; background-color: transparent; transition: opacity 1.2s ease-in-out; }
@@ -103,6 +138,7 @@
     </style>
 </head>
 <body>
+    <div id="petals-container"></div>
     <audio id="weddingAudio" loop preload="auto"><source src="WeddingInvitationAudio.mp3" type="audio/mpeg"></audio>
     <button class="music-btn" id="musicToggle" onclick="toggleAudio()" title="Toggle Music">🎵</button>
     
@@ -136,7 +172,7 @@
 
         <!-- Our Story Text -->
         <div class="fade-section">
-            <p style="font-size: 0.78rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
+            <p style="font-size: 0.86rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
             <div class="flip-card" id="storyFlipCard" onclick="flipCard()">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -165,7 +201,7 @@
                     <div class="scratch-content">
                         <p class="text-burgundy" style="font-weight: 700;">11:00 AM - 1:00 PM</p>
                         <p class="text-burgundy" style="margin-top: 3px;">508 Darshan Avenue, D Block, GT Road, Amritsar</p>
-                        <a href="https://maps.google.com/?q=508+Darshan+Avenue+D+block+Gt+road+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Darshan+Avenue+D+Block+Amritsar" target="_blank" class="btn-link">Location Map</a>
                     </div>
                 </div>
             </div>
@@ -184,7 +220,7 @@
                     <div class="scratch-content">
                         <p class="text-burgundy" style="font-weight: 700;">11:00 AM - 4:00 PM</p>
                         <p class="text-burgundy" style="margin-top: 3px;">Green Wood Villa, By-Pass Near Ryan Intl School, Golden Gate, Amritsar</p>
-                        <a href="https://maps.google.com/?q=Green+wood+villa+By+Pass+Near+Ryan+International+School+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Green+Wood+Villa+By-Pass+Near+Ryan+International+School+Golden+Gate+Amritsar" target="_blank" class="btn-link">Location Map</a>
                     </div>
                 </div>
             </div>
@@ -203,7 +239,7 @@
                     <div class="scratch-content">
                         <p class="text-burgundy" style="font-weight: 700;">7:00 PM Onwards</p>
                         <p class="text-burgundy" style="margin-top: 3px;">Darshan Avenue, D Block, Amritsar</p>
-                        <a href="https://maps.google.com/?q=Darshan+Avenue+D+block+Amritsar" target="_blank" class="btn-link">Location Map</a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Darshan+Avenue+D+Block+Amritsar" target="_blank" class="btn-link">Location Map</a>
                     </div>
                 </div>
             </div>
@@ -304,7 +340,29 @@
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-section').forEach(section => observer.observe(section));
-
+        function createGoldenPetals() {
+            const container = document.getElementById('petals-container');
+            const petalCount = 25; // Number of visible falling petals
+        
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+        
+                // Randomize size, starting position, animation duration, and delay
+                const size = Math.random() * 8 + 10; // Size between 10px and 18px
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size * 1.4}px`;
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.animationDuration = `${Math.random() * 5 + 5}s`; // Fall duration between 5s and 10s
+                petal.style.animationDelay = `${Math.random() * 5}s`;
+        
+                container.appendChild(petal);
+            }
+        }
+        
+        // Initialize petals when page loads
+        window.addEventListener('load', createGoldenPetals);
+        
         function initScratchCard(canvasId) { 
             const canvas = document.getElementById(canvasId); 
             if (!canvas) return; 
