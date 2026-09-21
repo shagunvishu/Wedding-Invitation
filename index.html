@@ -18,7 +18,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--creamy); color: var(--text-light); text-align: center; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--burgundy); color: var(--text-light); text-align: center; overflow-x: hidden; }
 
         /* Golden Petals Layer */
         #petals-container {
@@ -369,7 +369,7 @@
             const ctx = canvas.getContext('2d'); 
             const color = canvas.getAttribute('data-color'); 
             const text = canvas.getAttribute('data-text'); 
-
+        
             function resizeCanvas() { 
                 canvas.width = canvas.parentElement.offsetWidth; 
                 canvas.height = canvas.parentElement.offsetHeight; 
@@ -384,7 +384,30 @@
             
             resizeCanvas(); 
             let isDrawing = false; 
-
+        
+            // Function to check how much of the canvas has been scratched
+            function checkScratchPercentage() {
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+                let clearPixels = 0;
+        
+                // Loop through alpha channel (every 4th value)
+                for (let i = 3; i < pixels.length; i += 4) {
+                    if (pixels[i] === 0) {
+                        clearPixels++;
+                    }
+                }
+        
+                const percentageScratched = (clearPixels / (pixels.length / 4)) * 100;
+        
+                // Once 35% or more is cleared, enable pointer-events so buttons are clickable
+                if (percentageScratched > 40) {
+                    canvas.style.pointerEvents = 'none'; // Allows clicks to pass through to the button underneath
+                    canvas.style.transition = 'opacity 0.5s ease';
+                    canvas.style.opacity = '0'; // Smoothly hide remaining canvas fragments
+                }
+            }
+        
             function scratch(e) { 
                 if (!isDrawing) return; 
                 const rect = canvas.getBoundingClientRect(); 
@@ -392,10 +415,12 @@
                 const clientY = e.touches ? e.touches[0].clientY : e.clientY; 
                 ctx.globalCompositeOperation = 'destination-out'; 
                 ctx.beginPath(); 
-                ctx.arc(clientX - rect.left, clientY - rect.top, 20, 0, Math.PI * 2); 
+                ctx.arc(clientX - rect.left, clientY - rect.top, 22, 0, Math.PI * 2); 
                 ctx.fill(); 
+        
+                checkScratchPercentage(); // Check scratch progress on each movement
             } 
-
+        
             canvas.addEventListener('mousedown', () => isDrawing = true); 
             canvas.addEventListener('mouseup', () => isDrawing = false); 
             canvas.addEventListener('mouseleave', () => isDrawing = false); 
