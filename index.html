@@ -95,7 +95,7 @@
             align-items: center;
         }
         
-        /* Burgundy S V with S positioned slightly higher than V */
+        /* Burgundy S V Monogram */
         .sv-text-group {
             position: relative;
             z-index: 2;
@@ -103,7 +103,7 @@
             align-items: center;
             font-family: 'Great Vibes', cursive;
             color: var(--burgundy);
-            font-size: 3.8rem;
+            font-size: 4rem;
             font-weight: 700;
             line-height: 1;
             opacity: 0;
@@ -112,7 +112,7 @@
         }
         
         .sv-text-group .char-s {
-            transform: translateY(-8px); /* Elevates S slightly above V */
+            transform: translateY(-8px);
             margin-right: -8px;
         }
         
@@ -120,7 +120,7 @@
             transform: translateY(6px);
         }
         
-        /* Circular Golden Leaf Wreath SVG */
+        /* Full Leaf Ring SVG */
         .green-leaf-wreath {
             position: absolute;
             top: 0; left: 0;
@@ -129,21 +129,21 @@
         }
         
         .green-leaf-wreath .leaf {
-            fill: var(--dark-royal-green);
+            fill: var(--royal-gold);
             opacity: 0;
             transform: scale(0);
             transform-origin: center;
-            transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         /* Staggered Content Reveal */
         .first-page-content {
             opacity: 0;
             transform: translateY(15px);
-            transition: opacity 1s ease 1.6s, transform 1s ease 1.6s; /* Fades in after SV & leaves complete */
+            transition: opacity 1s ease 1.8s, transform 1s ease 1.8s;
         }
         
-        /* Active State Triggered when Opening Envelope */
+        /* Active Animation Triggers */
         #opening-container.opened ~ .main-container .sv-text-group {
             opacity: 1;
             transform: scale(1);
@@ -264,33 +264,54 @@
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
             
-            <!-- Monogram Container with Golden Leaf Circle -->
+            <!-- Monogram Container with 36 Green Leaves (No Circles) -->
             <div class="sv-monogram-container">
                 
-                <!-- Burgundy S V Text -->
+                <!-- Burgundy S V Monogram -->
                 <div class="sv-text-group">
                     <span class="char-s">S</span>
                     <span class="char-v">V</span>
                 </div>
-        
-                <!-- SVG Ring of Golden Leaves -->
+            
+                <!-- Ring of 36 Organic Green Leaves -->
                 <svg class="green-leaf-wreath" viewBox="0 0 100 100">
-                    <!-- Dashed Gold Accent Ring -->
-                    <circle cx="50" cy="50" r="42" fill="none" stroke="var(--royal-gold)" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
-                    
-                    <!-- 12 Sequentially Animated Leaves Clockwise around Circle -->
-                    <path class="leaf leaf-1" d="M 50,4 A 5,5 0 0,1 50,14 A 5,5 0 0,1 50,4" />
-                    <path class="leaf leaf-2" d="M 72,11 A 5,5 0 0,1 77,20 A 5,5 0 0,1 72,11" />
-                    <path class="leaf leaf-3" d="M 88,28 A 5,5 0 0,1 94,36 A 5,5 0 0,1 88,28" />
-                    <path class="leaf leaf-4" d="M 94,50 A 5,5 0 0,1 94,60 A 5,5 0 0,1 94,50" />
-                    <path class="leaf leaf-5" d="M 88,72 A 5,5 0 0,1 82,80 A 5,5 0 0,1 88,72" />
-                    <path class="leaf leaf-6" d="M 72,88 A 5,5 0 0,1 65,94 A 5,5 0 0,1 72,88" />
-                    <path class="leaf leaf-7" d="M 50,96 A 5,5 0 0,1 50,86 A 5,5 0 0,1 50,96" />
-                    <path class="leaf leaf-8" d="M 28,88 A 5,5 0 0,1 22,80 A 5,5 0 0,1 28,88" />
-                    <path class="leaf leaf-9" d="M 12,72 A 5,5 0 0,1 6,64 A 5,5 0 0,1 12,72" stroke-linecap="round"/>
-                    <path class="leaf leaf-10" d="M 6,50 A 5,5 0 0,1 6,40 A 5,5 0 0,1 6,50" />
-                    <path class="leaf leaf-11" d="M 12,28 A 5,5 0 0,1 18,20 A 5,5 0 0,1 12,28" />
-                    <path class="leaf leaf-12" d="M 28,11 A 5,5 0 0,1 35,6 A 5,5 0 0,1 28,11" />
+                    <!-- Leaf 1 to 36 rendered clockwise around circle (r=42, center=50,50) -->
+                    <path class="leaf leaf-1"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(0, 50, 50)" />
+                    <path class="leaf leaf-2"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(10, 50, 50)" />
+                    <path class="leaf leaf-3"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(20, 50, 50)" />
+                    <path class="leaf leaf-4"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(30, 50, 50)" />
+                    <path class="leaf leaf-5"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(40, 50, 50)" />
+                    <path class="leaf leaf-6"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(50, 50, 50)" />
+                    <path class="leaf leaf-7"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(60, 50, 50)" />
+                    <path class="leaf leaf-8"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(70, 50, 50)" />
+                    <path class="leaf leaf-9"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(80, 50, 50)" />
+                    <path class="leaf leaf-10" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(90, 50, 50)" />
+                    <path class="leaf leaf-11" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(100, 50, 50)" />
+                    <path class="leaf leaf-12" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(110, 50, 50)" />
+                    <path class="leaf leaf-13" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(120, 50, 50)" />
+                    <path class="leaf leaf-14" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(130, 50, 50)" />
+                    <path class="leaf leaf-15" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(140, 50, 50)" />
+                    <path class="leaf leaf-16" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(150, 50, 50)" />
+                    <path class="leaf leaf-17" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(160, 50, 50)" />
+                    <path class="leaf leaf-18" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(170, 50, 50)" />
+                    <path class="leaf leaf-19" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(180, 50, 50)" />
+                    <path class="leaf leaf-20" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(190, 50, 50)" />
+                    <path class="leaf leaf-21" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(200, 50, 50)" />
+                    <path class="leaf leaf-22" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(210, 50, 50)" />
+                    <path class="leaf leaf-23" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(220, 50, 50)" />
+                    <path class="leaf leaf-24" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(230, 50, 50)" />
+                    <path class="leaf leaf-25" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(240, 50, 50)" />
+                    <path class="leaf leaf-26" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(250, 50, 50)" />
+                    <path class="leaf leaf-27" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(260, 50, 50)" />
+                    <path class="leaf leaf-28" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(270, 50, 50)" />
+                    <path class="leaf leaf-29" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(280, 50, 50)" />
+                    <path class="leaf leaf-30" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(290, 50, 50)" />
+                    <path class="leaf leaf-31" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(300, 50, 50)" />
+                    <path class="leaf leaf-32" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(310, 50, 50)" />
+                    <path class="leaf leaf-33" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(320, 50, 50)" />
+                    <path class="leaf leaf-34" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(330, 50, 50)" />
+                    <path class="leaf leaf-35" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(340, 50, 50)" />
+                    <path class="leaf leaf-36" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(350, 50, 50)" />
                 </svg>
             </div>
         
