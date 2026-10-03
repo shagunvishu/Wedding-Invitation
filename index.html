@@ -84,18 +84,25 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
-        /* Compact Laurel Monogram Layout */
+        /* Card Container Alignment for First Page */
+        .card-bg.bg-save {
+            justify-content: flex-start !important;
+            padding-top: 15px !important;
+            padding-bottom: 25px !important;
+        }
+        
+        /* Expanded Wreath Monogram Layout */
         .sv-monogram-container {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 5px auto 10px auto; /* Fits neatly in top circle area */
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 5px auto; /* Keeps monogram high in the top open area */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* Burgundy S V Monogram (Overlapping the Wreath) */
+        /* Burgundy S V Monogram (Sized to fit inside leaves without intersecting) */
         .sv-text-group {
             position: relative;
             z-index: 3;
@@ -103,7 +110,7 @@
             align-items: center;
             font-family: 'Great Vibes', cursive;
             color: var(--burgundy);
-            font-size: 3.2rem; /* Scaled so text overlaps the leaf ring */
+            font-size: 2.7rem; /* Reduced font size so text stays inside the leaf ring */
             font-weight: 700;
             line-height: 1;
             opacity: 0;
@@ -112,15 +119,15 @@
         }
         
         .sv-text-group .char-s {
-            transform: translateY(-6px);
-            margin-right: -6px;
+            transform: translateY(-5px);
+            margin-right: -4px;
         }
         
         .sv-text-group .char-v {
-            transform: translateY(4px);
+            transform: translateY(3px);
         }
         
-        /* Royal Green Open Laurel Wreath SVG (With Top Gap) */
+        /* Royal Green Open Laurel Wreath SVG */
         .royal-wreath-svg {
             position: absolute;
             top: 0; left: 0;
@@ -148,7 +155,7 @@
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 1s ease 1.2s, transform 1s ease 1.2s;
-            margin-top: 80px; /* Pushes Punjabi & Invitation text down into lower box area */
+            margin-top: 110px; /* Pushes Punjabi Gurbani & family text down below Khanda */
         }
         
         #opening-container.opened ~ .main-container .first-page-content {
@@ -223,68 +230,67 @@
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
             
-            <!-- Top Monogram Container (Positioned in Top Circle Area above Khanda) -->
+            <!-- Monogram Container (Shifted Up in Top Circle Space) -->
             <div class="sv-monogram-container">
                 
-                <!-- Burgundy S V Monogram -->
+                <!-- Burgundy S V Monogram (Positioned Comfortably Inside Wreath) -->
                 <div class="sv-text-group">
                     <span class="char-s">S</span>
                     <span class="char-v">V</span>
                 </div>
         
-                <!-- Open Laurel Leaf Wreath SVG (Open Top Gap & Smaller Radius) -->
+                <!-- Larger Open Laurel Leaf Wreath SVG -->
                 <svg class="royal-wreath-svg" viewBox="0 0 100 100">
-                    <!-- Left Branch (Curving from bottom to top-left) -->
+                    <!-- Left Branch -->
                     <g>
-                        <path d="M 46,92 C 22,90 10,70 10,50 C 10,28 26,14 38,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
-                        <!-- Left Leaf Clusters -->
+                        <path d="M 46,92 C 22,90 8,70 8,50 C 8,28 24,14 36,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
                         <path d="M 44,93 Q 36,98 32,90 Q 40,88 44,93 Z" />
                         <path d="M 32,88 Q 20,92 18,82 Q 28,80 32,88 Z" />
-                        <path d="M 22,78 Q 10,80 10,70 Q 20,68 22,78 Z" />
-                        <path d="M 14,64 Q 2,64 4,54 Q 14,54 14,64 Z" />
-                        <path d="M 11,48 Q 1,44 6,34 Q 14,38 11,48 Z" />
-                        <path d="M 14,34 Q 6,26 14,18 Q 20,26 14,34 Z" />
-                        <path d="M 22,22 Q 16,12 26,6 Q 30,16 22,22 Z" />
-                        <path d="M 34,12 Q 32,2 42,0 Q 42,10 34,12 Z" />
+                        <path d="M 20,78 Q 8,80 8,70 Q 18,68 20,78 Z" />
+                        <path d="M 12,64 Q 0,64 2,54 Q 12,54 12,64 Z" />
+                        <path d="M 9,48 Q -1,44 4,34 Q 12,38 9,48 Z" />
+                        <path d="M 12,34 Q 4,26 12,18 Q 18,26 12,34 Z" />
+                        <path d="M 20,22 Q 14,12 24,6 Q 28,16 20,22 Z" />
+                        <path d="M 32,12 Q 30,2 40,0 Q 40,10 32,12 Z" />
                     </g>
         
-                    <!-- Right Branch (Curving from bottom to top-right) -->
+                    <!-- Right Branch -->
                     <g>
-                        <path d="M 54,92 C 78,90 90,70 90,50 C 90,28 74,14 62,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
-                        <!-- Right Leaf Clusters -->
+                        <path d="M 54,92 C 78,90 92,70 92,50 C 92,28 76,14 64,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
                         <path d="M 56,93 Q 64,98 68,90 Q 60,88 56,93 Z" />
                         <path d="M 68,88 Q 80,92 82,82 Q 72,80 68,88 Z" />
-                        <path d="M 78,78 Q 90,80 90,70 Q 80,68 78,78 Z" />
-                        <path d="M 86,64 Q 98,64 96,54 Q 86,54 86,64 Z" />
-                        <path d="M 89,48 Q 99,44 94,34 Q 86,38 89,48 Z" />
-                        <path d="M 86,34 Q 94,26 86,18 Q 80,26 86,34 Z" />
-                        <path d="M 78,22 Q 84,12 74,6 Q 70,16 78,22 Z" />
-                        <path d="M 66,12 Q 68,2 58,0 Q 58,10 66,12 Z" />
+                        <path d="M 80,78 Q 92,80 92,70 Q 82,68 80,78 Z" />
+                        <path d="M 88,64 Q 100,64 98,54 Q 88,54 88,64 Z" />
+                        <path d="M 91,48 Q 101,44 96,34 Q 88,38 91,48 Z" />
+                        <path d="M 88,34 Q 96,26 88,18 Q 82,26 88,34 Z" />
+                        <path d="M 80,22 Q 86,12 76,6 Q 72,16 80,22 Z" />
+                        <path d="M 68,12 Q 70,2 60,0 Q 60,10 68,12 Z" />
                     </g>
                 </svg>
             </div>
         
-            <!-- Lower Content Area (Positioned in Bottom Box Area below Khanda) -->
+            <!-- Content Area (Cleanly Placed Below Khanda Motif) -->
             <div class="first-page-content">
-                <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
+                <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.88rem; line-height: 1.6; font-weight: 700;">
                     ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
                     ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
                 </p>
         
-                <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 16px 0 12px 0; line-height: 1.5;">
+                <p class="text-burgundy" style="font-style: italic; font-size: 0.82rem; margin: 14px 0 10px 0; line-height: 1.5;">
                     Together with their families,<br>
                     invite you to celebrate their<br>
                     wedding union
                 </p>
                 
-                <div style="line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
+                <div style="line-height: 1.45; font-size: 0.82rem;" class="text-burgundy">
                     <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
-                    <div class="script-font" style="font-size: 1.6rem; margin: 4px 0;">&</div>
+                    <div class="script-font" style="font-size: 1.5rem; margin: 2px 0;">&</div>
                     <p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p>
                 </div>
             </div>
         
         </div>
+        
         <!-- Our Story Text -->
         <div class="fade-section">
             <p style="font-size: 0.86rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
