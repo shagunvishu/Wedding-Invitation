@@ -84,18 +84,18 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
-        /* Monogram Container */
+        /* Compact Laurel Monogram Layout */
         .sv-monogram-container {
             position: relative;
-            width: 170px;
-            height: 170px;
-            margin: 10px auto 20px auto;
+            width: 120px;
+            height: 120px;
+            margin: 5px auto 10px auto; /* Fits neatly in top circle area */
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* Burgundy S V (Layered on top of the wreath) */
+        /* Burgundy S V Monogram (Overlapping the Wreath) */
         .sv-text-group {
             position: relative;
             z-index: 3;
@@ -103,7 +103,7 @@
             align-items: center;
             font-family: 'Great Vibes', cursive;
             color: var(--burgundy);
-            font-size: 4.2rem;
+            font-size: 3.2rem; /* Scaled so text overlaps the leaf ring */
             font-weight: 700;
             line-height: 1;
             opacity: 0;
@@ -112,15 +112,15 @@
         }
         
         .sv-text-group .char-s {
-            transform: translateY(-8px);
-            margin-right: -8px;
+            transform: translateY(-6px);
+            margin-right: -6px;
         }
         
         .sv-text-group .char-v {
-            transform: translateY(6px);
+            transform: translateY(4px);
         }
         
-        /* Royal Green Leaf Wreath SVG (Layered directly behind SV) */
+        /* Royal Green Open Laurel Wreath SVG (With Top Gap) */
         .royal-wreath-svg {
             position: absolute;
             top: 0; left: 0;
@@ -128,13 +128,12 @@
             z-index: 2;
             fill: #0A2F1D; /* Royal Green */
             stroke: #0A2F1D;
-            /* Bottom-to-top clip reveal setup */
             clip-path: inset(100% 0 0 0);
             opacity: 0;
-            transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s, opacity 0.4s ease 0.5s;
+            transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.4s, opacity 0.4s ease 0.4s;
         }
         
-        /* Bottom-to-top Reveal Triggered on Open */
+        /* Reveal Animations Triggered on Opening */
         #opening-container.opened ~ .main-container .sv-text-group {
             opacity: 1;
             transform: scale(1);
@@ -142,21 +141,21 @@
         
         #opening-container.opened ~ .main-container .royal-wreath-svg {
             opacity: 1;
-            clip-path: inset(0 0 0 0); /* Reveals upward from bottom to top */
+            clip-path: inset(0 0 0 0);
         }
         
-        /* Fades in content below monogram after wreath completes */
         .first-page-content {
             opacity: 0;
             transform: translateY(15px);
-            transition: opacity 1s ease 1.5s, transform 1s ease 1.5s;
+            transition: opacity 1s ease 1.2s, transform 1s ease 1.2s;
+            margin-top: 80px; /* Pushes Punjabi & Invitation text down into lower box area */
         }
         
         #opening-container.opened ~ .main-container .first-page-content {
             opacity: 1;
             transform: translateY(0);
         }
-                
+                        
         /* 4. First Page Extra Top and Bottom Padding */
         .card-bg.bg-save { padding-top: 55px; padding-bottom: 55px; }
 
@@ -224,7 +223,7 @@
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
             
-            <!-- Monogram Container with Royal Green Wreath (#0A2F1D) -->
+            <!-- Top Monogram Container (Positioned in Top Circle Area above Khanda) -->
             <div class="sv-monogram-container">
                 
                 <!-- Burgundy S V Monogram -->
@@ -232,56 +231,47 @@
                     <span class="char-s">S</span>
                     <span class="char-v">V</span>
                 </div>
-            
-                <!-- Circular Royal Green Leaf Wreath (Layered Behind SV) -->
-                <svg class="royal-wreath-svg" viewBox="0 0 200 200">
-                    <!-- Circular Stem Ring -->
-                    <circle cx="100" cy="100" r="82" fill="none" stroke="#0A2F1D" stroke-width="2.5" />
-                    
-                    <!-- Left Curving Leaf Branch -->
-                    <g stroke-width="0">
-                        <path d="M 100,182 C 50,182 18,150 18,100 C 18,50 50,18 100,18" fill="none" stroke="#0A2F1D" stroke-width="2"/>
-                        <!-- Outer & Inner Leaf Clusters around Left Circle -->
-                        <path d="M 90,184 Q 82,192 78,182 Q 85,180 90,184 Z" />
-                        <path d="M 75,178 Q 65,188 60,176 Q 69,172 75,178 Z" />
-                        <path d="M 58,168 Q 46,176 42,162 Q 52,160 58,168 Z" />
-                        <path d="M 42,152 Q 28,158 26,144 Q 37,142 42,152 Z" />
-                        <path d="M 30,132 Q 14,136 14,120 Q 25,120 30,132 Z" />
-                        <path d="M 22,110 Q 6,110 8,94 Q 18,98 22,110 Z" />
-                        <path d="M 20,88 Q 6,82 12,68 Q 21,75 20,88 Z" />
-                        <path d="M 26,66 Q 16,54 24,42 Q 32,52 26,66 Z" />
-                        <path d="M 38,46 Q 30,32 42,22 Q 48,34 38,46 Z" />
-                        <path d="M 56,30 Q 50,14 64,8 Q 68,22 56,30 Z" />
-                        <path d="M 76,18 Q 74,2 88,0 Q 88,16 76,18 Z" />
+        
+                <!-- Open Laurel Leaf Wreath SVG (Open Top Gap & Smaller Radius) -->
+                <svg class="royal-wreath-svg" viewBox="0 0 100 100">
+                    <!-- Left Branch (Curving from bottom to top-left) -->
+                    <g>
+                        <path d="M 46,92 C 22,90 10,70 10,50 C 10,28 26,14 38,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
+                        <!-- Left Leaf Clusters -->
+                        <path d="M 44,93 Q 36,98 32,90 Q 40,88 44,93 Z" />
+                        <path d="M 32,88 Q 20,92 18,82 Q 28,80 32,88 Z" />
+                        <path d="M 22,78 Q 10,80 10,70 Q 20,68 22,78 Z" />
+                        <path d="M 14,64 Q 2,64 4,54 Q 14,54 14,64 Z" />
+                        <path d="M 11,48 Q 1,44 6,34 Q 14,38 11,48 Z" />
+                        <path d="M 14,34 Q 6,26 14,18 Q 20,26 14,34 Z" />
+                        <path d="M 22,22 Q 16,12 26,6 Q 30,16 22,22 Z" />
+                        <path d="M 34,12 Q 32,2 42,0 Q 42,10 34,12 Z" />
                     </g>
-            
-                    <!-- Right Curving Leaf Branch -->
-                    <g stroke-width="0">
-                        <path d="M 100,182 C 150,182 182,150 182,100 C 182,50 150,18 100,18" fill="none" stroke="#0A2F1D" stroke-width="2"/>
-                        <!-- Outer & Inner Leaf Clusters around Right Circle -->
-                        <path d="M 110,184 Q 118,192 122,182 Q 115,180 110,184 Z" />
-                        <path d="M 125,178 Q 135,188 140,176 Q 131,172 125,178 Z" />
-                        <path d="M 142,168 Q 154,176 158,162 Q 148,160 142,168 Z" />
-                        <path d="M 158,152 Q 172,158 174,144 Q 163,142 158,152 Z" />
-                        <path d="M 170,132 Q 186,136 186,120 Q 175,120 170,132 Z" />
-                        <path d="M 178,110 Q 194,110 192,94 Q 182,98 178,110 Z" />
-                        <path d="M 180,88 Q 194,82 188,68 Q 179,75 180,88 Z" />
-                        <path d="M 174,66 Q 184,54 176,42 Q 168,52 174,66 Z" />
-                        <path d="M 162,46 Q 170,32 158,22 Q 152,34 162,46 Z" />
-                        <path d="M 144,30 Q 150,14 136,8 Q 132,22 144,30 Z" />
-                        <path d="M 124,18 Q 126,2 112,0 Q 112,16 124,18 Z" />
+        
+                    <!-- Right Branch (Curving from bottom to top-right) -->
+                    <g>
+                        <path d="M 54,92 C 78,90 90,70 90,50 C 90,28 74,14 62,8" fill="none" stroke="#0A2F1D" stroke-width="2"/>
+                        <!-- Right Leaf Clusters -->
+                        <path d="M 56,93 Q 64,98 68,90 Q 60,88 56,93 Z" />
+                        <path d="M 68,88 Q 80,92 82,82 Q 72,80 68,88 Z" />
+                        <path d="M 78,78 Q 90,80 90,70 Q 80,68 78,78 Z" />
+                        <path d="M 86,64 Q 98,64 96,54 Q 86,54 86,64 Z" />
+                        <path d="M 89,48 Q 99,44 94,34 Q 86,38 89,48 Z" />
+                        <path d="M 86,34 Q 94,26 86,18 Q 80,26 86,34 Z" />
+                        <path d="M 78,22 Q 84,12 74,6 Q 70,16 78,22 Z" />
+                        <path d="M 66,12 Q 68,2 58,0 Q 58,10 66,12 Z" />
                     </g>
                 </svg>
             </div>
         
-            <!-- Bottom Text Content (Fades in after S V and leaves animation) -->
+            <!-- Lower Content Area (Positioned in Bottom Box Area below Khanda) -->
             <div class="first-page-content">
                 <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
                     ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
                     ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
                 </p>
         
-                <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 18px 0 12px 0; line-height: 1.5;">
+                <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 16px 0 12px 0; line-height: 1.5;">
                     Together with their families,<br>
                     invite you to celebrate their<br>
                     wedding union
@@ -295,7 +285,6 @@
             </div>
         
         </div>
-
         <!-- Our Story Text -->
         <div class="fade-section">
             <p style="font-size: 0.86rem; color: var(--light-gold); margin-bottom: 8px;">(Tap card to flip for photo)</p>
