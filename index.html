@@ -83,6 +83,49 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
+        /* Animated SV Monogram Logo */
+        .sv-monogram-container {
+            margin: 10px auto 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .sv-logo {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: var(--burgundy);
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+            position: relative;
+            padding: 10px 25px;
+            border-radius: 50%;
+            transform: scale(0.3);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+        }
+        
+        /* Wreath ring around SV monogram */
+        .sv-logo::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 110px; height: 110px;
+            border: 2px dashed var(--royal-gold);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Zoom-in & shimmer animation after envelope opens */
+        #opening-container.opened ~ .main-container .sv-logo {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
         /* 4. First Page Extra Top and Bottom Padding */
         .card-bg.bg-save { padding-top: 55px; padding-bottom: 55px; }
 
@@ -149,24 +192,25 @@
         
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
-            <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
+            
+            <!-- Top-Center Animated SV Monogram -->
+            <div class="sv-monogram-container">
+                <div class="sv-logo">SV</div>
+            </div>
+        
+            <!-- Pushed Down Punjabi Text -->
+            <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700; margin-top: 15px;">
                 ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
                 ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
             </p>
-                        
-            <div style="margin: 15px 0;">
-                <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1;">Shagun</h1>
-                <div class="script-font text-burgundy" style="font-size: 2rem; margin: 2px 0;">&</div>
-                <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1;">Vishu</h1>
-            </div>
-
-            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px; line-height: 1.5;">
+        
+            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 20px 0 15px 0; line-height: 1.5;">
                 Together with their families,<br>
                 invite you to celebrate their<br>
                 wedding union
             </p>
             
-            <div style="margin-top: 15px; line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
+            <div style="line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
                 <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
                 <div class="script-font" style="font-size: 1.6rem; margin: 4px 0;">&</div>
                 <p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p>
