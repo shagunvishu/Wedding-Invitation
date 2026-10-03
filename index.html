@@ -149,8 +149,11 @@
         
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
-            <p class="text-burgundy" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.72rem; line-height: 1.5;">Waheguru Ji da Khalsa<br>Waheguru Ji di Fateh</p>
-            
+            <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
+                ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
+                ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
+            </p>
+                        
             <div style="margin: 15px 0;">
                 <h1 class="script-font text-burgundy" style="font-size: 3.2rem; line-height: 1;">Shagun</h1>
                 <div class="script-font text-burgundy" style="font-size: 2rem; margin: 2px 0;">&</div>
@@ -179,10 +182,12 @@
                         <h2 class="script-font text-glow-gold" style="font-size: 2.2rem; margin-bottom: 12px;">Our Story</h2>
                         <p style="font-size: 0.88rem; line-height: 1.7; color: #FFFDF9; font-weight: 500;">
                             From Punjab to Andhra Pradesh,<br>
-                            destiny brought two hearts together in Germany.<br><br>
-                            Between university days, shared laughter, and a little bit of chaos,<br>
-                            we found love—and our forever. ❤️<br><br>
-                            <em>Two journeys. One beautiful beginning.</em>
+                            destiny brought us together in Germany.<br><br>
+                            What began with university days and shared part-time jobs<br>
+                            turned into endless laughter, embracing cultures, and a love<br>
+                            that grows stronger every day.<br><br>
+                            <em>Today, we begin our greatest adventure yet—and we can’t wait<br>
+                            to celebrate this special chapter with the people we love most. ❤️</em>
                         </p>
                     </div>
                     <div class="flip-card-back">
@@ -463,6 +468,26 @@
             initScratchCard('canvas-jaggo'); 
             startCountdown();
         });
+
+        // Automatically pause music when Chrome/browser is minimized or tab is switched
+        document.addEventListener('visibilitychange', () => {
+            const audio = document.getElementById('weddingAudio');
+            const btn = document.getElementById('musicToggle');
+        
+            if (document.hidden) {
+                if (!audio.paused) {
+                    audio.pause();
+                    audio.dataset.wasPlaying = 'true'; // Remember state
+                }
+            } else {
+                // Resume playback only if it was playing before minimizing
+                if (audio.dataset.wasPlaying === 'true') {
+                    audio.play().catch(e => console.log('Autoplay prevented'));
+                    audio.dataset.wasPlaying = 'false';
+                }
+            }
+        });
     </script>
+
 </body>
 </html>
