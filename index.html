@@ -84,31 +84,31 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
-        /* Animated Monogram Layout */
+        /* Monogram Container */
         .sv-monogram-container {
             position: relative;
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
             margin: 10px auto 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        /* Burgundy S V Monogram */
+        /* Burgundy S V (Layered on top of the wreath) */
         .sv-text-group {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             display: flex;
             align-items: center;
             font-family: 'Great Vibes', cursive;
             color: var(--burgundy);
-            font-size: 4rem;
+            font-size: 4.2rem;
             font-weight: 700;
             line-height: 1;
             opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(0.85);
+            transition: opacity 0.8s ease 0.2s, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
         }
         
         .sv-text-group .char-s {
@@ -120,82 +120,42 @@
             transform: translateY(6px);
         }
         
-        /* Full Leaf Ring SVG */
-        .green-leaf-wreath {
+        /* Royal Green Leaf Wreath SVG (Layered directly behind SV) */
+        .royal-wreath-svg {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1;
-        }
-        
-        .green-leaf-wreath .leaf {
-            fill: var(--dark-royal-green);
+            z-index: 2;
+            fill: #0A2F1D; /* Royal Green */
+            stroke: #0A2F1D;
+            /* Bottom-to-top clip reveal setup */
+            clip-path: inset(100% 0 0 0);
             opacity: 0;
-            transform: scale(0);
-            transform-origin: center;
-            transition: opacity 0.15s ease, transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: clip-path 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s, opacity 0.4s ease 0.5s;
         }
         
-        /* Staggered Content Reveal */
-        .first-page-content {
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 1s ease 1.8s, transform 1s ease 1.8s;
-        }
-        
-        /* Active Animation Triggers */
+        /* Bottom-to-top Reveal Triggered on Open */
         #opening-container.opened ~ .main-container .sv-text-group {
             opacity: 1;
             transform: scale(1);
         }
         
-        #opening-container.opened ~ .main-container .green-leaf-wreath .leaf {
+        #opening-container.opened ~ .main-container .royal-wreath-svg {
             opacity: 1;
-            transform: scale(1);
+            clip-path: inset(0 0 0 0); /* Reveals upward from bottom to top */
+        }
+        
+        /* Fades in content below monogram after wreath completes */
+        .first-page-content {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1s ease 1.5s, transform 1s ease 1.5s;
         }
         
         #opening-container.opened ~ .main-container .first-page-content {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Rapid Clockwise Sequential Delays for 36 Leaves */
-        #opening-container.opened ~ .main-container .leaf-1  { transition-delay: 0.30s; }
-        #opening-container.opened ~ .main-container .leaf-2  { transition-delay: 0.34s; }
-        #opening-container.opened ~ .main-container .leaf-3  { transition-delay: 0.38s; }
-        #opening-container.opened ~ .main-container .leaf-4  { transition-delay: 0.42s; }
-        #opening-container.opened ~ .main-container .leaf-5  { transition-delay: 0.46s; }
-        #opening-container.opened ~ .main-container .leaf-6  { transition-delay: 0.50s; }
-        #opening-container.opened ~ .main-container .leaf-7  { transition-delay: 0.54s; }
-        #opening-container.opened ~ .main-container .leaf-8  { transition-delay: 0.58s; }
-        #opening-container.opened ~ .main-container .leaf-9  { transition-delay: 0.62s; }
-        #opening-container.opened ~ .main-container .leaf-10 { transition-delay: 0.66s; }
-        #opening-container.opened ~ .main-container .leaf-11 { transition-delay: 0.70s; }
-        #opening-container.opened ~ .main-container .leaf-12 { transition-delay: 0.74s; }
-        #opening-container.opened ~ .main-container .leaf-13 { transition-delay: 0.78s; }
-        #opening-container.opened ~ .main-container .leaf-14 { transition-delay: 0.82s; }
-        #opening-container.opened ~ .main-container .leaf-15 { transition-delay: 0.86s; }
-        #opening-container.opened ~ .main-container .leaf-16 { transition-delay: 0.90s; }
-        #opening-container.opened ~ .main-container .leaf-17 { transition-delay: 0.94s; }
-        #opening-container.opened ~ .main-container .leaf-18 { transition-delay: 0.98s; }
-        #opening-container.opened ~ .main-container .leaf-19 { transition-delay: 1.02s; }
-        #opening-container.opened ~ .main-container .leaf-20 { transition-delay: 1.06s; }
-        #opening-container.opened ~ .main-container .leaf-21 { transition-delay: 1.10s; }
-        #opening-container.opened ~ .main-container .leaf-22 { transition-delay: 1.14s; }
-        #opening-container.opened ~ .main-container .leaf-23 { transition-delay: 1.18s; }
-        #opening-container.opened ~ .main-container .leaf-24 { transition-delay: 1.22s; }
-        #opening-container.opened ~ .main-container .leaf-25 { transition-delay: 1.26s; }
-        #opening-container.opened ~ .main-container .leaf-26 { transition-delay: 1.30s; }
-        #opening-container.opened ~ .main-container .leaf-27 { transition-delay: 1.34s; }
-        #opening-container.opened ~ .main-container .leaf-28 { transition-delay: 1.38s; }
-        #opening-container.opened ~ .main-container .leaf-29 { transition-delay: 1.42s; }
-        #opening-container.opened ~ .main-container .leaf-30 { transition-delay: 1.46s; }
-        #opening-container.opened ~ .main-container .leaf-31 { transition-delay: 1.50s; }
-        #opening-container.opened ~ .main-container .leaf-32 { transition-delay: 1.54s; }
-        #opening-container.opened ~ .main-container .leaf-33 { transition-delay: 1.58s; }
-        #opening-container.opened ~ .main-container .leaf-34 { transition-delay: 1.62s; }
-        #opening-container.opened ~ .main-container .leaf-35 { transition-delay: 1.66s; }
-        #opening-container.opened ~ .main-container .leaf-36 { transition-delay: 1.70s; }
                 
         /* 4. First Page Extra Top and Bottom Padding */
         .card-bg.bg-save { padding-top: 55px; padding-bottom: 55px; }
@@ -264,7 +224,7 @@
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
             
-            <!-- Monogram Container with 36 Green Leaves (No Circles) -->
+            <!-- Monogram Container with Royal Green Wreath (#0A2F1D) -->
             <div class="sv-monogram-container">
                 
                 <!-- Burgundy S V Monogram -->
@@ -273,45 +233,44 @@
                     <span class="char-v">V</span>
                 </div>
             
-                <!-- Ring of 36 Organic Green Leaves -->
-                <svg class="green-leaf-wreath" viewBox="0 0 100 100">
-                    <!-- Leaf 1 to 36 rendered clockwise around circle (r=42, center=50,50) -->
-                    <path class="leaf leaf-1"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(0, 50, 50)" />
-                    <path class="leaf leaf-2"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(10, 50, 50)" />
-                    <path class="leaf leaf-3"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(20, 50, 50)" />
-                    <path class="leaf leaf-4"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(30, 50, 50)" />
-                    <path class="leaf leaf-5"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(40, 50, 50)" />
-                    <path class="leaf leaf-6"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(50, 50, 50)" />
-                    <path class="leaf leaf-7"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(60, 50, 50)" />
-                    <path class="leaf leaf-8"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(70, 50, 50)" />
-                    <path class="leaf leaf-9"  d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(80, 50, 50)" />
-                    <path class="leaf leaf-10" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(90, 50, 50)" />
-                    <path class="leaf leaf-11" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(100, 50, 50)" />
-                    <path class="leaf leaf-12" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(110, 50, 50)" />
-                    <path class="leaf leaf-13" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(120, 50, 50)" />
-                    <path class="leaf leaf-14" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(130, 50, 50)" />
-                    <path class="leaf leaf-15" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(140, 50, 50)" />
-                    <path class="leaf leaf-16" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(150, 50, 50)" />
-                    <path class="leaf leaf-17" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(160, 50, 50)" />
-                    <path class="leaf leaf-18" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(170, 50, 50)" />
-                    <path class="leaf leaf-19" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(180, 50, 50)" />
-                    <path class="leaf leaf-20" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(190, 50, 50)" />
-                    <path class="leaf leaf-21" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(200, 50, 50)" />
-                    <path class="leaf leaf-22" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(210, 50, 50)" />
-                    <path class="leaf leaf-23" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(220, 50, 50)" />
-                    <path class="leaf leaf-24" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(230, 50, 50)" />
-                    <path class="leaf leaf-25" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(240, 50, 50)" />
-                    <path class="leaf leaf-26" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(250, 50, 50)" />
-                    <path class="leaf leaf-27" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(260, 50, 50)" />
-                    <path class="leaf leaf-28" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(270, 50, 50)" />
-                    <path class="leaf leaf-29" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(280, 50, 50)" />
-                    <path class="leaf leaf-30" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(290, 50, 50)" />
-                    <path class="leaf leaf-31" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(300, 50, 50)" />
-                    <path class="leaf leaf-32" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(310, 50, 50)" />
-                    <path class="leaf leaf-33" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(320, 50, 50)" />
-                    <path class="leaf leaf-34" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(330, 50, 50)" />
-                    <path class="leaf leaf-35" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(340, 50, 50)" />
-                    <path class="leaf leaf-36" d="M 50,8 Q 53,4 50,0 Q 47,4 50,8 Z" transform="rotate(350, 50, 50)" />
+                <!-- Circular Royal Green Leaf Wreath (Layered Behind SV) -->
+                <svg class="royal-wreath-svg" viewBox="0 0 200 200">
+                    <!-- Circular Stem Ring -->
+                    <circle cx="100" cy="100" r="82" fill="none" stroke="#0A2F1D" stroke-width="2.5" />
+                    
+                    <!-- Left Curving Leaf Branch -->
+                    <g stroke-width="0">
+                        <path d="M 100,182 C 50,182 18,150 18,100 C 18,50 50,18 100,18" fill="none" stroke="#0A2F1D" stroke-width="2"/>
+                        <!-- Outer & Inner Leaf Clusters around Left Circle -->
+                        <path d="M 90,184 Q 82,192 78,182 Q 85,180 90,184 Z" />
+                        <path d="M 75,178 Q 65,188 60,176 Q 69,172 75,178 Z" />
+                        <path d="M 58,168 Q 46,176 42,162 Q 52,160 58,168 Z" />
+                        <path d="M 42,152 Q 28,158 26,144 Q 37,142 42,152 Z" />
+                        <path d="M 30,132 Q 14,136 14,120 Q 25,120 30,132 Z" />
+                        <path d="M 22,110 Q 6,110 8,94 Q 18,98 22,110 Z" />
+                        <path d="M 20,88 Q 6,82 12,68 Q 21,75 20,88 Z" />
+                        <path d="M 26,66 Q 16,54 24,42 Q 32,52 26,66 Z" />
+                        <path d="M 38,46 Q 30,32 42,22 Q 48,34 38,46 Z" />
+                        <path d="M 56,30 Q 50,14 64,8 Q 68,22 56,30 Z" />
+                        <path d="M 76,18 Q 74,2 88,0 Q 88,16 76,18 Z" />
+                    </g>
+            
+                    <!-- Right Curving Leaf Branch -->
+                    <g stroke-width="0">
+                        <path d="M 100,182 C 150,182 182,150 182,100 C 182,50 150,18 100,18" fill="none" stroke="#0A2F1D" stroke-width="2"/>
+                        <!-- Outer & Inner Leaf Clusters around Right Circle -->
+                        <path d="M 110,184 Q 118,192 122,182 Q 115,180 110,184 Z" />
+                        <path d="M 125,178 Q 135,188 140,176 Q 131,172 125,178 Z" />
+                        <path d="M 142,168 Q 154,176 158,162 Q 148,160 142,168 Z" />
+                        <path d="M 158,152 Q 172,158 174,144 Q 163,142 158,152 Z" />
+                        <path d="M 170,132 Q 186,136 186,120 Q 175,120 170,132 Z" />
+                        <path d="M 178,110 Q 194,110 192,94 Q 182,98 178,110 Z" />
+                        <path d="M 180,88 Q 194,82 188,68 Q 179,75 180,88 Z" />
+                        <path d="M 174,66 Q 184,54 176,42 Q 168,52 174,66 Z" />
+                        <path d="M 162,46 Q 170,32 158,22 Q 152,34 162,46 Z" />
+                        <path d="M 144,30 Q 150,14 136,8 Q 132,22 144,30 Z" />
+                        <path d="M 124,18 Q 126,2 112,0 Q 112,16 124,18 Z" />
+                    </g>
                 </svg>
             </div>
         
