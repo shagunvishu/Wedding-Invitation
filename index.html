@@ -83,48 +83,94 @@
         /* Background Cards */
         .card-bg { border-radius: 18px; padding: 30px 18px; border: 2px solid var(--royal-gold); background-size: contain; background-repeat: no-repeat; background-position: center; background-color: rgba(58, 0, 14, 0.85); position: relative; min-height: 520px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.6); overflow: hidden; }
         
-        /* Animated SV Monogram Logo */
+        /* Animated Monogram Layout */
         .sv-monogram-container {
-            margin: 10px auto 15px auto;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 10px auto 20px auto;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         
-        .sv-logo {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4.5rem;
-            font-weight: 700;
-            color: var(--burgundy);
-            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #AA771C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        /* Burgundy S V with S positioned slightly higher than V */
+        .sv-text-group {
             position: relative;
-            padding: 10px 25px;
-            border-radius: 50%;
-            transform: scale(0.3);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            font-family: 'Great Vibes', cursive;
+            color: var(--burgundy);
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1;
             opacity: 0;
-            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        /* Wreath ring around SV monogram */
-        .sv-logo::before {
-            content: '';
+        .sv-text-group .char-s {
+            transform: translateY(-8px); /* Elevates S slightly above V */
+            margin-right: -8px;
+        }
+        
+        .sv-text-group .char-v {
+            transform: translateY(6px);
+        }
+        
+        /* Circular Golden Leaf Wreath SVG */
+        .golden-leaf-wreath {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 110px; height: 110px;
-            border: 2px dashed var(--royal-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
         }
         
-        /* Zoom-in & shimmer animation after envelope opens */
-        #opening-container.opened ~ .main-container .sv-logo {
-            transform: scale(1);
-            opacity: 1;
+        .golden-leaf-wreath .leaf {
+            fill: var(--royal-gold);
+            opacity: 0;
+            transform: scale(0);
+            transform-origin: center;
+            transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        /* Staggered Content Reveal */
+        .first-page-content {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 1s ease 1.6s, transform 1s ease 1.6s; /* Fades in after SV & leaves complete */
+        }
+        
+        /* Active State Triggered when Opening Envelope */
+        #opening-container.opened ~ .main-container .sv-text-group {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        #opening-container.opened ~ .main-container .golden-leaf-wreath .leaf {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        #opening-container.opened ~ .main-container .first-page-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered Delays for Sequential Clockwise Leaf Animations */
+        #opening-container.opened ~ .main-container .leaf-1  { transition-delay: 0.50s; }
+        #opening-container.opened ~ .main-container .leaf-2  { transition-delay: 0.58s; }
+        #opening-container.opened ~ .main-container .leaf-3  { transition-delay: 0.66s; }
+        #opening-container.opened ~ .main-container .leaf-4  { transition-delay: 0.74s; }
+        #opening-container.opened ~ .main-container .leaf-5  { transition-delay: 0.82s; }
+        #opening-container.opened ~ .main-container .leaf-6  { transition-delay: 0.90s; }
+        #opening-container.opened ~ .main-container .leaf-7  { transition-delay: 0.98s; }
+        #opening-container.opened ~ .main-container .leaf-8  { transition-delay: 1.06s; }
+        #opening-container.opened ~ .main-container .leaf-9  { transition-delay: 1.14s; }
+        #opening-container.opened ~ .main-container .leaf-10 { transition-delay: 1.22s; }
+        #opening-container.opened ~ .main-container .leaf-11 { transition-delay: 1.30s; }
+        #opening-container.opened ~ .main-container .leaf-12 { transition-delay: 1.38s; }
         
         /* 4. First Page Extra Top and Bottom Padding */
         .card-bg.bg-save { padding-top: 55px; padding-bottom: 55px; }
@@ -193,28 +239,56 @@
         <!-- First Page Cover Card -->
         <div class="fade-section card-bg bg-save">
             
-            <!-- Top-Center Animated SV Monogram -->
+            <!-- Monogram Container with Golden Leaf Circle -->
             <div class="sv-monogram-container">
-                <div class="sv-logo">SV</div>
+                
+                <!-- Burgundy S V Text -->
+                <div class="sv-text-group">
+                    <span class="char-s">S</span>
+                    <span class="char-v">V</span>
+                </div>
+        
+                <!-- SVG Ring of Golden Leaves -->
+                <svg class="golden-leaf-wreath" viewBox="0 0 100 100">
+                    <!-- Dashed Gold Accent Ring -->
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="var(--royal-gold)" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+                    
+                    <!-- 12 Sequentially Animated Leaves Clockwise around Circle -->
+                    <path class="leaf leaf-1" d="M 50,4 A 5,5 0 0,1 50,14 A 5,5 0 0,1 50,4" />
+                    <path class="leaf leaf-2" d="M 72,11 A 5,5 0 0,1 77,20 A 5,5 0 0,1 72,11" />
+                    <path class="leaf leaf-3" d="M 88,28 A 5,5 0 0,1 94,36 A 5,5 0 0,1 88,28" />
+                    <path class="leaf leaf-4" d="M 94,50 A 5,5 0 0,1 94,60 A 5,5 0 0,1 94,50" />
+                    <path class="leaf leaf-5" d="M 88,72 A 5,5 0 0,1 82,80 A 5,5 0 0,1 88,72" />
+                    <path class="leaf leaf-6" d="M 72,88 A 5,5 0 0,1 65,94 A 5,5 0 0,1 72,88" />
+                    <path class="leaf leaf-7" d="M 50,96 A 5,5 0 0,1 50,86 A 5,5 0 0,1 50,96" />
+                    <path class="leaf leaf-8" d="M 28,88 A 5,5 0 0,1 22,80 A 5,5 0 0,1 28,88" />
+                    <path class="leaf leaf-9" d="M 12,72 A 5,5 0 0,1 6,64 A 5,5 0 0,1 12,72" stroke-linecap="round"/>
+                    <path class="leaf leaf-10" d="M 6,50 A 5,5 0 0,1 6,40 A 5,5 0 0,1 6,50" />
+                    <path class="leaf leaf-11" d="M 12,28 A 5,5 0 0,1 18,20 A 5,5 0 0,1 12,28" />
+                    <path class="leaf leaf-12" d="M 28,11 A 5,5 0 0,1 35,6 A 5,5 0 0,1 28,11" />
+                </svg>
             </div>
         
-            <!-- Pushed Down Punjabi Text -->
-            <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700; margin-top: 15px;">
-                ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
-                ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
-            </p>
+            <!-- Bottom Text Content (Fades in after S V and leaves animation) -->
+            <div class="first-page-content">
+                <p class="text-burgundy" style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
+                    ਸਤਿਗੁਰ ਦਾਤੈ ਕਾਜੁ ਰਚਾਇਆ ਆਪਣੀ ਮੇਹਰ ਕਰਾਈ ॥<br>
+                    ਦਾਸਾਂ ਕਾਰਜ ਆਪਿ ਸਵਾਰੇ ਇਹੁ ਉਸਦੀ ਵਡਿਆਈ ॥
+                </p>
         
-            <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 20px 0 15px 0; line-height: 1.5;">
-                Together with their families,<br>
-                invite you to celebrate their<br>
-                wedding union
-            </p>
-            
-            <div style="line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
-                <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
-                <div class="script-font" style="font-size: 1.6rem; margin: 4px 0;">&</div>
-                <p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p>
+                <p class="text-burgundy" style="font-style: italic; font-size: 0.85rem; margin: 18px 0 12px 0; line-height: 1.5;">
+                    Together with their families,<br>
+                    invite you to celebrate their<br>
+                    wedding union
+                </p>
+                
+                <div style="line-height: 1.5; font-size: 0.85rem;" class="text-burgundy">
+                    <p><strong>Shagun</strong><br>D/o S. Ranbir Singh Nibber & Kulbir Kaur<br><em>Amritsar, Punjab</em></p>
+                    <div class="script-font" style="font-size: 1.6rem; margin: 4px 0;">&</div>
+                    <p><strong>Vishu</strong><br>S/o Subrahmanyam Katta & Madhavi Katta<br><em>Vijayawada, Andhra Pradesh</em></p>
+                </div>
             </div>
+        
         </div>
 
         <!-- Our Story Text -->
